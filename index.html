@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#F4EBD7"/>
+  <title>Cockroach Citizen Party Bangladesh — Voice of the Forgotten Majority</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #F4EBD7;
+      --bg-dark: #E8D9BF;
+      --ink: #1a1208;
+      --ink-muted: #5c4a28;
+      --accent: #8B1A1A;
+      --accent2: #3d6b3d;
+      --gold: #C8960C;
+      --paper: #FAF4E8;
+      --border: #C8A96A;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'IM Fell English', Georgia, serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 6px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-inner span { margin: 0 3rem; }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      padding: 12px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-join {
+      background: var(--ink);
+      color: var(--bg) !important;
+      padding: 6px 16px;
+      border-radius: 2px;
+    }
+    .nav-join:hover { background: var(--accent) !important; color: var(--bg) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 5vw 60px;
+      text-align: center;
+      border-bottom: 2px solid var(--border);
+      position: relative;
+      background: var(--paper);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 28px,
+        rgba(200,169,106,0.12) 28px, rgba(200,169,106,0.12) 29px
+      );
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow span { color: var(--accent); font-weight: 700; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .hero-title em { color: var(--accent); font-style: italic; }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 12px 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 2px solid var(--ink);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      padding: 12px 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 2px solid var(--ink);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--ink); color: var(--bg); }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 0 5vw;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 4px;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 70px 5vw; border-bottom: 2px solid var(--border); }
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── VISION ── */
+    #vision .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .vision-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    .vision-poster {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+      border: 4px solid var(--border);
+    }
+    .poster-stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.3em; margin-bottom: 1rem; }
+    .poster-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--border);
+      margin-bottom: 1rem;
+    }
+    .poster-cockroach { font-size: 5rem; margin: 1rem 0; }
+    .poster-party-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+    .poster-sub {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--border);
+      margin-top: 0.5rem;
+    }
+
+    /* ── MANIFESTO ── */
+    #manifesto { background: var(--bg-dark); }
+    .demands-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .demand-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      background: var(--paper);
+      border-left: 4px solid var(--accent);
+    }
+    .demand-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 2.5rem;
+    }
+    .demand-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .demand-text p {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── ELIGIBILITY ── */
+    #join .eligibility-box {
+      background: var(--paper);
+      border: 2px solid var(--border);
+      padding: 2.5rem;
+      max-width: 680px;
+    }
+    .eligibility-box p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--ink-muted);
+      margin-bottom: 1.2rem;
+    }
+    .eligibility-box .rule {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .rule-mark {
+      font-family: 'Space Mono', monospace;
+      color: var(--accent2);
+      font-weight: 700;
+      font-size: 1rem;
+      min-width: 1.5rem;
+    }
+    .rule-text { font-size: 0.95rem; line-height: 1.6; }
+    .join-form { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .join-form input {
+      flex: 1;
+      min-width: 220px;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      font-family: 'IM Fell English', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      outline: none;
+    }
+    .join-form input:focus { border-color: var(--ink); }
+    .join-form button {
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      padding: 12px 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .join-form button:hover { background: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--ink); color: var(--bg); }
+    #contact .section-tag { color: var(--border); }
+    #contact .section-title { color: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    .contact-info p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: rgba(244,235,215,0.7);
+      margin-bottom: 0.8rem;
+    }
+    .contact-info strong { color: var(--border); font-style: normal; }
+    .social-links { display: flex; flex-direction: column; gap: 0.8rem; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(244,235,215,0.8);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--border); }
+    .social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(200,169,106,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(244,235,215,0.4);
+      text-align: center;
+      padding: 20px 5vw;
+      border-top: 1px solid rgba(200,169,106,0.2);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── DIVIDER ── */
+    .ornament {
+      text-align: center;
+      color: var(--border);
+      font-size: 1.2rem;
+      letter-spacing: 1rem;
+      margin: 2rem 0;
+    }
+
+    .logo-section {
+      background: var(--paper);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 5vw;
+      border-bottom: 2px solid var(--border);
+    }
+    .logo-wrap {
+      max-width: 480px;
+      width: 100%;
+      border: 3px solid var(--border);
+      background: var(--bg);
+    }
+
+    @media (max-width: 700px) {
+      #vision .vision-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>★ COCKROACH CITIZEN PARTY BANGLADESH — EST. 2026</span>
+    <span>· ZERO CORPORATE DONORS ·</span>
+    <span>★ FIVE DEMANDS. ONE SWARM.</span>
+    <span>· VOICE OF THE FORGOTTEN MAJORITY ·</span>
+    <span>★ COCKROACH CITIZEN PARTY BANGLADESH — EST. 2026</span>
+    <span>· ZERO CORPORATE DONORS ·</span>
+    <span>★ FIVE DEMANDS. ONE SWARM.</span>
+    <span>· VOICE OF THE FORGOTTEN MAJORITY ·</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand"><span>🪳</span> COCKROACH CITIZEN PARTY BANGLADESH</a>
+  <ul class="nav-links">
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#join">Eligibility</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#join" class="nav-join">Join the Party</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Party Launch · Volume 1, Edition 1 · <span>Filed under: Righteous Indignation</span></div>
+  <h1 class="hero-title">
+    Voice of the<br/>
+    <em>Forgotten</em><br/>
+    Majority.
+  </h1>
+  <p class="hero-subtitle">
+    A political party for citizens the system pretends don't exist.
+    Five demands. Zero sponsors. One large, unstoppable swarm.
+  </p>
+  <div class="hero-ctas">
+    <a href="#join" class="btn-primary">Join the Party →</a>
+    <a href="#manifesto" class="btn-secondary">Read the Manifesto</a>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Demands</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Corporate Donors</div></div>
+    <div class="stat"><div class="stat-num">1M+</div><div class="stat-label">Members &amp; Counting</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Stubbornness</div></div>
+  </div>
+</section>
+
+<!-- LOGO SECTION -->
+<div class="logo-section">
+  <div class="logo-wrap">
+    <svg width="100%" viewBox="0 0 680 340" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Cockroach Citizen Party Logo</title>
+      <desc>Official logo of Cockroach Citizen Party</desc>
+      <style>
+        .logo-bg2{fill:#F4EBD7}.border-rect2{fill:none;stroke:#C8A96A;stroke-width:2.5}.inner-rect2{fill:none;stroke:#C8A96A;stroke-width:1}.ink2{fill:#1a1208}.accent2b{fill:#8B1A1A}.gold2{fill:#C8960C}.muted2{fill:#5c4a28}
+      </style>
+      <rect width="680" height="340" class="logo-bg2"/>
+      <rect x="14" y="14" width="652" height="312" class="border-rect2"/>
+      <rect x="22" y="22" width="636" height="296" class="inner-rect2"/>
+      <text x="34" y="46" class="gold2" font-size="18" font-family="Georgia,serif">✦</text>
+      <text x="628" y="46" class="gold2" font-size="18" font-family="Georgia,serif" text-anchor="middle">✦</text>
+      <text x="34" y="322" class="gold2" font-size="18" font-family="Georgia,serif">✦</text>
+      <text x="628" y="322" class="gold2" font-size="18" font-family="Georgia,serif" text-anchor="middle">✦</text>
+      <text x="340" y="50" class="muted2" font-size="10" text-anchor="middle" font-family="'Space Mono','Courier New',monospace" letter-spacing="0.2em">EST. 2026 · OFFICIAL SEAL</text>
+      <line x1="60" y1="58" x2="280" y2="58" stroke="#C8A96A" stroke-width="0.8"/>
+      <line x1="400" y1="58" x2="620" y2="58" stroke="#C8A96A" stroke-width="0.8"/>
+      <g transform="translate(280,75)">
+        <ellipse cx="60" cy="80" rx="28" ry="44" fill="#1a1208"/>
+        <ellipse cx="60" cy="36" rx="18" ry="14" fill="#1a1208"/>
+        <path d="M50 26 Q30 5 20 -8" fill="none" stroke="#1a1208" stroke-width="2" stroke-linecap="round"/>
+        <path d="M50 26 Q25 10 14 2" fill="none" stroke="#1a1208" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M70 26 Q90 5 100 -8" fill="none" stroke="#1a1208" stroke-width="2" stroke-linecap="round"/>
+        <path d="M70 26 Q95 10 106 2" fill="none" stroke="#1a1208" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="52" cy="34" r="4" fill="#F4EBD7"/>
+        <circle cx="68" cy="34" r="4" fill="#F4EBD7"/>
+        <circle cx="52" cy="34" r="2" fill="#8B1A1A"/>
+        <circle cx="68" cy="34" r="2" fill="#8B1A1A"/>
+        <line x1="60" y1="48" x2="60" y2="118" stroke="#C8A96A" stroke-width="1"/>
+        <ellipse cx="44" cy="82" rx="14" ry="36" fill="#3a2a10" opacity="0.7"/>
+        <ellipse cx="76" cy="82" rx="14" ry="36" fill="#3a2a10" opacity="0.7"/>
+        <path d="M36 60 Q16 52 8 44" fill="none" stroke="#1a1208" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M34 80 Q12 76 4 70" fill="none" stroke="#1a1208" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M36 100 Q16 100 8 108" fill="none" stroke="#1a1208" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M84 60 Q104 52 112 44" fill="none" stroke="#1a1208" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M86 80 Q108 76 116 70" fill="none" stroke="#1a1208" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M84 100 Q104 100 112 108" fill="none" stroke="#1a1208" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M48 122 Q60 134 72 122" fill="none" stroke="#1a1208" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <text x="340" y="222" class="gold2" font-size="14" text-anchor="middle" letter-spacing="18" font-family="Georgia,serif">★ ★ ★</text>
+      <text x="340" y="252" class="ink2" font-size="22" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="900" letter-spacing="0.04em">COCKROACH CITIZEN PARTY</text>
+      <text x="340" y="272" class="accent2b" font-size="16" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-weight="900" letter-spacing="0.12em">BANGLADESH</text>
+      <text x="340" y="288" class="muted2" font-size="11" text-anchor="middle" font-family="'Space Mono','Courier New',monospace" letter-spacing="0.18em">ককরোচ সিটিজেন পার্টি বাংলাদেশ</text>
+      <line x1="120" y1="287" x2="560" y2="287" stroke="#C8A96A" stroke-width="0.8"/>
+      <text x="340" y="305" class="muted2" font-size="11" text-anchor="middle" font-family="Georgia,serif" font-style="italic">Voice of the Forgotten Majority</text>
+    </svg>
+  </div>
+</div>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="vision-grid">
+    <div class="vision-text">
+      <div class="section-tag">★ Our Vision</div>
+      <h2 class="section-title">Built for the People No One Counts.</h2>
+      <div class="ornament">— ✦ —</div>
+      <p>
+        The Cockroach Citizen Party was born from a simple, stubborn truth: ordinary citizens
+        have been ignored, forgotten, and dismissed by every government that promised to serve them.
+      </p>
+      <p>
+        Like the cockroach — resilient, unkillable, and everywhere — we refuse to disappear.
+        We are the constituency that survives every bad policy, every broken promise,
+        every rigged system. And now, we organise.
+      </p>
+      <p>
+        Sponsored by no one. Funded by nothing. Headquartered wherever the wifi works.
+        Now accepting rants, solidarity, and righteous anger.
+      </p>
+    </div>
+    <div class="vision-poster">
+      <div class="poster-stars">★ ★ ★</div>
+      <div class="poster-label">Official Poster · No. 001</div>
+      <div class="poster-cockroach">🪳</div>
+      <div class="poster-party-name">
+        COCKROACH CITIZEN PARTY<br/>
+        <span style="color:var(--accent);font-size:1rem;">BANGLADESH</span><br/>
+        <span style="font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;">ককরোচ সিটিজেন পার্টি বাংলাদেশ</span>
+      </div>
+      <div class="poster-sub">Est. 2026 · Voice of the Forgotten</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="section-tag">★ Our Manifesto</div>
+  <h2 class="section-title">Five Demands. Non-Negotiable.</h2>
+  <p style="color:var(--ink-muted);font-style:italic;margin-bottom:1rem;max-width:540px;">
+    We do not negotiate with systems that were never designed to listen. These are not requests — they are demands.
+  </p>
+  <div class="demands-list">
+    <div class="demand-item">
+      <div class="demand-num">01</div>
+      <div class="demand-text">
+        <h3>Accountability, Not Apology Tours</h3>
+        <p>Officials who fail citizens must face real consequences — not press conferences where they express "deep regret" and carry on unchanged.</p>
+      </div>
+    </div>
+    <div class="demand-item">
+      <div class="demand-num">02</div>
+      <div class="demand-text">
+        <h3>Transparent Public Spending</h3>
+        <p>Every rupee of public money must be traceable, published, and legible to the people who funded it. No more invisible budgets for visible crises.</p>
+      </div>
+    </div>
+    <div class="demand-item">
+      <div class="demand-num">03</div>
+      <div class="demand-text">
+        <h3>Education That Actually Educates</h3>
+        <p>A curriculum designed for curiosity, not rote memorisation. A system that produces thinkers, not paper-passers.</p>
+      </div>
+    </div>
+    <div class="demand-item">
+      <div class="demand-num">04</div>
+      <div class="demand-text">
+        <h3>Healthcare as a Right, Not a Privilege</h3>
+        <p>No citizen should choose between debt and survival. Basic healthcare belongs to everyone — not just those who can afford the premium.</p>
+      </div>
+    </div>
+    <div class="demand-item">
+      <div class="demand-num">05</div>
+      <div class="demand-text">
+        <h3>An End to Performance Governance</h3>
+        <p>We have had enough of ministers who are excellent at appearing to govern. We demand people who are actually good at it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY / JOIN -->
+<section id="join">
+  <div class="section-tag">★ Eligibility</div>
+  <h2 class="section-title">Who Can Join?</h2>
+  <div class="eligibility-box">
+    <p>Membership in the Cockroach Citizen Party is open to anyone who meets the following rigorous criteria:</p>
+    <div class="rule"><div class="rule-mark">✓</div><div class="rule-text">You have been ignored by at least one government policy that directly affected you.</div></div>
+    <div class="rule"><div class="rule-mark">✓</div><div class="rule-text">You are capable of feeling frustrated at a system that should — and does not — work.</div></div>
+    <div class="rule"><div class="rule-mark">✓</div><div class="rule-text">You still believe, stubbornly, that things can be better.</div></div>
+    <div class="rule"><div class="rule-mark">✓</div><div class="rule-text">You are willing to keep showing up, like a cockroach, no matter how many times the system tries to swat you down.</div></div>
+    <div class="ornament">— ✦ —</div>
+    <p><em>No application fee. No membership dues. No corporate endorsement required. Just a pulse and a grievance.</em></p>
+    <div class="join-form">
+      <input type="email" placeholder="your@email.com — we'll be in touch"/>
+      <button type="submit">Join Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">★ Find Us</div>
+  <h2 class="section-title">We Are Everywhere.</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p><strong>Headquarters:</strong> Wherever the wifi works.</p>
+      <p><strong>Founded:</strong> 2026 · In a moment of collective exasperation.</p>
+      <p><strong>Funding:</strong> None. Proudly.</p>
+      <p><strong>Donors:</strong> Zero corporate interests. We are unsponsored and unafraid.</p>
+      <p><strong>Complaints:</strong> Filed daily. Acknowledged rarely. Pursued relentlessly.</p>
+    </div>
+    <div class="social-links">
+      <a href="#" class="social-link"><span class="social-icon">𝕏</span> @CockroachCitizenParty</a>
+      <a href="#" class="social-link"><span class="social-icon">📸</span> @cockroachcitizenparty</a>
+      <a href="#" class="social-link"><span class="social-icon">💬</span> r/CockroachCitizenParty</a>
+      <a href="#" class="social-link"><span class="social-icon">🎮</span> Discord — The Swarm</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 COCKROACH CITIZEN PARTY BANGLADESH · VOICE OF THE FORGOTTEN MAJORITY · SPONSORED BY NO ONE · FUNDED BY NOTHING</p>
+</footer>
+
+</body>
+</html>
